@@ -1,4 +1,4 @@
-#include <libcol.h>
+#include <libcol/libcol.h>
 #include <stdio.h>
 
 int main() {

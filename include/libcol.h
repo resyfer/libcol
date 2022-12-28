@@ -1,5 +1,7 @@
 #include <sys/types.h>
 
+#include "global.h"
+
 #ifndef __LIBCOL_H
 #define __LIBCOL_H
 

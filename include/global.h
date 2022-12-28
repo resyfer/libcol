@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include <include/util.h>
+#include "util.h"
 
 static int SUPPORT_COLORS = 1;
 

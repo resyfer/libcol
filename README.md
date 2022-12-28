@@ -13,7 +13,7 @@ For installation, please go [here](#installation). For documentation, please go 
 The shown below is a tl;dr version. Proper instructions are [here](#step-1)
 
 ```c
-#include <libcol.h>
+#include <libcol/libcol.h>
 #include <stdio.h>
 
 int main() {
@@ -35,7 +35,7 @@ $ ./test.o
 Import the library:
 
 ```c
-#include <libcol.h>
+#include <libcol/libcol.h>
 ```
 
 **NOTE**: Link the library and dependencies when compiling

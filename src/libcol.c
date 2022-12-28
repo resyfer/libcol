@@ -3,7 +3,6 @@
 #include <unistd.h>
 
 #include <include/libcol.h>
-#include <include/global.h>
 
 void
 color_init()
