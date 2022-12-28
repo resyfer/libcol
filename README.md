@@ -4,8 +4,6 @@ A C library for colored output (Uses printf internally). Pretty easy to use. For
 
 For installation, please go [here](#installation). For documentation, please go [here](#documentation).
 
-**NOTE**: Only supports HTTP connections as of now.
-
 ## Usage
 
 ### TL;DR
@@ -29,6 +27,9 @@ Compile and run:
 $ gcc test.c -o test.o -lcol
 $ ./test.o
 ```
+Output:
+
+![image](https://user-images.githubusercontent.com/74897008/209649275-46b785c9-02e9-4998-9aa9-fdcc696cdd04.png)
 
 ### Step 1
 
