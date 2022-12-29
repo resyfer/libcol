@@ -11,13 +11,32 @@ For installation, please go [here](#installation). For documentation, please go 
 The shown below is a tl;dr version. Proper instructions are [here](#step-1)
 
 ```c
-#include <libcol/libcol.h>
+#include <libcol/col.h>
 #include <stdio.h>
 
 int main() {
-  PCOL("Hello\n", RED);
-  printf("Msg: %s <- Msg Done\n", print_col("world", GREEN));
-  return 0;
+
+	char *color_green = col_str(GREEN);
+	printf("%sHello World%s\n", color_green, RESET);
+	free(color_green);
+
+
+	char *color_yellow = col_str(YELLOW);
+	char *color_red_italic = col_str_style(RED, ITALIC);
+	printf("%sH%si%s\n", color_red_italic, color_yellow, RESET);
+
+	free(color_yellow);
+	free(color_red_italic);
+
+	printf("%s\n", colorify("Awesome library", BLUE));
+	// The above method is possible, but the allocated memory
+	// for the text is not free-d after use, so please use it like:
+	//
+	// char *text = colorify("Awesome library", BLUE);
+	// printf("%s\n", text);
+	// free(text);
+
+	return 0;
 }
 ```
 
@@ -36,7 +55,7 @@ Output:
 Import the library:
 
 ```c
-#include <libcol/libcol.h>
+#include <libcol/col.h>
 ```
 
 **NOTE**: Link the library and dependencies when compiling
@@ -50,7 +69,16 @@ $ gcc a.c -o a.o -lcol
 Print in color:
 
 ```c
-printf("Msg: %s <- Msg Done\n", print_col("world", GREEN));
+char *color_green = col_str(GREEN);
+printf("%sHello World%s\n", color_green, RESET);
+free(color_green);
+// or
+
+printf("%s\n", colorify("Awesome library", BLUE));
+// Please use instead:
+// char *text = colorify("Awesome library", BLUE);
+// printf("%s\n", text);
+// free(text);
 ```
 
 ## Allowed Colors
@@ -80,14 +108,14 @@ Provide the password when prompted.
 
 ## Documentation
 
-#### Coloring Parts of Printf
-
+### For getting the color string of colors or styles
 ```c
-char *print_col(char *text, color_t color);
+char* col_str(color_t color);
+char* col_str_style(color_t color, style_t style);
 ```
 
-#### Entire colored line
-
+### For coloring or styling a string
 ```c
-PCOL(TEXT, COLOR);
+char* colorify(char *text, color_t color);
+char* colorify_style(char *text, color_t color, style_t style);
 ```
