@@ -48,7 +48,7 @@ $ ./test.o
 ```
 Output:
 
-![image](https://user-images.githubusercontent.com/74897008/209649275-46b785c9-02e9-4998-9aa9-fdcc696cdd04.png)
+![image](https://user-images.githubusercontent.com/74897008/209982661-88f2d16f-8e5c-4091-a138-1acb401d558e.png)
 
 ### Step 1
 
