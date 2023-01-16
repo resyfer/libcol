@@ -14,27 +14,24 @@ The shown below is a tl;dr version. Proper instructions are [here](#step-1)
 #include <libcol/col.h>
 #include <stdio.h>
 
+#define MAX 200
+
 int main() {
 
-	char *color_green = col_str(GREEN);
+	char color_green[MAX] = {0},
+		color_yellow[MAX] = {0},
+		color_red_italic[MAX] = {0},
+		color_text_blue[MAX] = {0};
+
+	col_str(GREEN, color_green);
+	col_str(YELLOW, color_yellow);
+	col_str_style(RED, ITALIC, color_red_italic);
+
 	printf("%sHello World%s\n", color_green, RESET);
-	free(color_green);
-
-
-	char *color_yellow = col_str(YELLOW);
-	char *color_red_italic = col_str_style(RED, ITALIC);
 	printf("%sH%si%s\n", color_red_italic, color_yellow, RESET);
 
-	free(color_yellow);
-	free(color_red_italic);
-
-	printf("%s\n", colorify("Awesome library", BLUE));
-	// The above method is possible, but the allocated memory
-	// for the text is not free-d after use, so please use it like:
-	//
-	// char *text = colorify("Awesome library", BLUE);
-	// printf("%s\n", text);
-	// free(text);
+	colorify("Awesome library", BLUE, color_text_blue);
+	printf("%s\n", color_text_blue);
 
 	return 0;
 }
@@ -69,16 +66,14 @@ $ gcc a.c -o a.o -lcol
 Print in color:
 
 ```c
-char *color_green = col_str(GREEN);
+char color_green[MAX] = {0};
+col_str(GREEN, color_green);
 printf("%sHello World%s\n", color_green, RESET);
-free(color_green);
-// or
 
-printf("%s\n", colorify("Awesome library", BLUE));
-// Please use instead:
-// char *text = colorify("Awesome library", BLUE);
-// printf("%s\n", text);
-// free(text);
+// or,
+
+char color_text_blue[MAX] = {0};
+colorify("Awesome library", BLUE, color_text_blue);
 ```
 
 ## Allowed Colors
@@ -105,17 +100,3 @@ rm -rf libcol
 ```
 
 Provide the password when prompted.
-
-## Documentation
-
-### For getting the color string of colors or styles
-```c
-char* col_str(color_t color);
-char* col_str_style(color_t color, style_t style);
-```
-
-### For coloring or styling a string
-```c
-char* colorify(char *text, color_t color);
-char* colorify_style(char *text, color_t color, style_t style);
-```

@@ -1,5 +1,6 @@
 NAME:=libcol
 ENTRY:=col
+MODE:=dev
 
 LD_LIBRARY_PATH:=/usr/local/lib
 INCLUDE:=/usr/local/include
@@ -18,7 +19,13 @@ OBJFILES := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCFILES))
 DEPFILES := $(patsubst $(SRC_DIR)/%.c,$(DEP_DIR)/%.d,$(SRCFILES))
 
 CC:=gcc
-CFLAGS:=-std=c11 $(addprefix -I,$(INC_DIR))
+
+ifeq ($(MODE), dev)
+CFLAGS:=-std=gnu18 -Og $(addprefix -I,$(INC_DIR))
+else
+CFLAGS:=-std=gnu18 -O0 $(addprefix -I,$(INC_DIR))
+endif
+
 INSTALL:=install
 
 all: $(NAME).so

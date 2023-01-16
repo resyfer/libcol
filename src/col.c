@@ -17,7 +17,7 @@ void
 col_str_style(color_t color, style_t style, char* color_str)
 {
 	if(!__LIBCOL_SUPPORT_COLORS) {
-		return "";
+		return;
 	}
 
 	snprintf(color_str, 8, "%c%c%d%c%dm", ESC, CSI, style, ';', color);
