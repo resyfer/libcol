@@ -1,8 +1,9 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 
 #include <include/col.h>
+
+static int __LIBCOL_SUPPORT_COLORS = 1;
 
 void
 color_init()
@@ -12,42 +13,34 @@ color_init()
 	}
 }
 
-char*
-col_str_style(color_t color, style_t style)
+void
+col_str_style(color_t color, style_t style, char* color_str)
 {
 	if(!__LIBCOL_SUPPORT_COLORS) {
 		return "";
 	}
 
-	char *color_str = malloc(8 * sizeof(char));
 	snprintf(color_str, 8, "%c%c%d%c%dm", ESC, CSI, style, ';', color);
-
-	return color_str;
 }
 
-char*
-col_str(color_t color)
+void
+col_str(color_t color, char* color_str)
 {
-	return col_str_style(color, NORMAL);
+	col_str_style(color, NORMAL, color_str);
 }
 
-char*
-colorify_style(char *text, color_t color, style_t style)
+void
+colorify_style(char *text, color_t color, style_t style, char* fmt_str)
 {
 	color_init();
-	char *fmt_text = (char*) malloc(MAX_SIZE * sizeof(char));
-	char *color_str = col_str_style(color, style);
+	char color_str[50] = {0};
+	col_str_style(color, style, color_str);
 
-	snprintf(fmt_text, MAX_SIZE, "%s%s%s", color_str, text, RESET);
-	fmt_text = realloc(fmt_text, sizeof(char) * (strlen(fmt_text) + 1));
-
-	free(color_str);
-
-	return fmt_text;
+	snprintf(fmt_str, MAX_SIZE, "%s%s%s", color_str, text, RESET);
 }
 
-char*
-colorify(char *text, color_t color)
+void
+colorify(char *text, color_t color, char* color_str)
 {
-	return colorify_style(text, color, NORMAL);
+	colorify_style(text, color, NORMAL, color_str);
 }

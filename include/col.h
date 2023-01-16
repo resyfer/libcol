@@ -30,10 +30,10 @@ typedef enum {
 
 static const char* RESET = "\033[0m"; // ESC CSI 0m
 
-char* col_str(color_t color);
-char* col_str_style(color_t color, style_t style);
+void col_str(color_t color, char* color_str);
+void col_str_style(color_t color, style_t style, char* color_str);
 
-char* colorify(char *text, color_t color);
-char* colorify_style(char *text, color_t color, style_t style);
+void colorify(char *text, color_t color, char* color_str);
+void colorify_style(char *text, color_t color, style_t style, char* color_str);
 
 #endif

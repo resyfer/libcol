@@ -8,8 +8,6 @@
 #ifndef __LIBCOL_GLOBAL_H
 #define __LIBCOL_GLOBAL_H
 
-static int __LIBCOL_SUPPORT_COLORS = 1;
-
 #ifndef OS
 	#ifdef __unix__
 		#ifdef __linux__
